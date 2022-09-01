@@ -7,11 +7,11 @@ const elements ={"paper": paper,"scissor":scissor,"rock":rock}
 
 const playerSelection = userPlay();
 const computerSelection = computerPlay();
-console.log(playerSelection);
-console.log(computerSelection);
 const gameResult = playRound(playerSelection,computerSelection);
 
 console.log(gameResult);
+
+game();
 
 
 /* Returns User/Cpu guess */
@@ -62,8 +62,52 @@ function playRound(pSelection,cSelection){
         }
 
     }
-    return `The result is Draw because both players selected ${pSelection}`;
+    return `The result is draw because both players selected ${pSelection}`;
 
 
+}
+function game(){
+    let result;
+    let userScore = 0;
+    let computerScore = 0;
+    console.log('Rock Paper Scissor Tournanment of 5 rounds');
+    console.log('Game starting...');
+    for(let i=0;i<5;i++){
+        console.log(`ROUND ${i+1}`);
+
+        const pSelection = userPlay();
+        const cSelection = computerPlay();
+        result = playRound(pSelection,cSelection);
+        console.log(result);
+
+        if(result.includes('win')){
+            userScore+=1;
+        }
+        else if(result.includes('lose')){
+            computerScore+=1;
+        }
+
+
+    }
+    
+    let gameCondition=userScore>computerScore?0:1;
+    console.log(`Your score: ${userScore}, CPU score: ${computerScore}.`)
+
+    switch(gameCondition){
+        case 0:
+            console.log('You lose!');
+            break;
+        case 1:
+            /*check for draw*/ 
+            if(userScore==computerScore){
+                console.log('No one wins');
+            }
+            else{
+                console.log('You win!');
+            }
+
+            
+    }
+    
 }
 /*Game*/ 
